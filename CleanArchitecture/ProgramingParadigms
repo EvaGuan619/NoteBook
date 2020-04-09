@@ -1,0 +1,10 @@
+## Structured Programming
+Edsger Wybe Dijkstra(1968)
+
+Unrestrained jumps(goto statements) is harmful to program structure, replaced with if/else and do/while.
+
+## Object-Oriented Programming
+OOP imposes discipline on indirect transfer of control
+
+## Functional Programming
+imposes discipline upon assignment
