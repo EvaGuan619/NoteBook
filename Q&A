@@ -1,0 +1,10 @@
+Http、Https、Tcp/Ip、三次握手、四次挥手
+JDBC、IO、文件流
+SQL
+
+这个时候我们就应该去做个丑不拉几的页面，进行简单的交互了，你这个时候要学HTML 、Servlet、MySQL、 JavaScript、Tomcat、CSS等。
+目标呢就是写出第一个动态网站，也许只是个登陆功能，只能展示下个人资料，但这是很重要的一步，
+你要弄清楚的是，一个用户的点击产生的请求，是从哪里发起，哪里接收，哪里处理，哪里返回，你得理解浏览器和服务器的关系和分工，Cookie和Session，Request和Response。
+Tip：我记得我刚出来面试就有面试题是这样的，一个Http请求从网页发起到服务端产生数据返回中间经历了些什么，或者Spring做了什么？
+
+传说中的框架，SSM（Spring SpringMVC Mybatis）, 在这个阶段你还要理解为什么要用这仨而不是那些Jsp、Servlet、Jdbc，你要体会到写MVC、三层架构的好处。

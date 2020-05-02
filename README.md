@@ -1,2 +1,2 @@
 # NoteBook
-Record Daily Notes
+Record Reading Notes
