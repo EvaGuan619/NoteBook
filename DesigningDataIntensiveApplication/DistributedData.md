@@ -10,6 +10,7 @@
 build-in feature of many relational databases, some non-relational databases, 
 distributed message brokers and some network filesystems and replicated block devices such as DRBD
     #### 5.1.1 Synchronous Versus Asynchronous Replication
+    ![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/sync%26Async.jpg?token=APCY6E4JXVGGPR5WR24W3CC6VXFV2)
     ##### Synchronous
     * Advantage: guaranteed to have an up-to-date copy of the data that is consistent with the leader
     * Disadvantage: if the follower doesn't respond, the write cannot be processed. The leader must block all writes and wait
@@ -29,6 +30,7 @@ distributed message brokers and some network filesystems and replicated block de
     #### 5.1.4 Implementation of Replication Logs
 ### 5.2 Problems with Replication Lag
 #### 5.2.1 Reading Your Own Writes
+![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/readingYourOwnWrites.jpg?token=APCY6EZYUL3QDNWWXCCQHD26VXFRI)
 With asynchronous replication, if the user views the data shortly after making a write, 
 the new data may not yet have reached the replica. To this user, it looks as though the data they submitted was lost.
 Mention a few solutions:
@@ -37,29 +39,37 @@ Mention a few solutions:
 * The client can remember the timestamp of its most recent write
 #### 5.2.2 Monotonic Reads
 After users have seen the data at one point in time, they shouldn't later see the data from some earlier point in time.
+![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/monotonicReads.jpg?token=APCY6E2NMJYUOPFIAHFLZH26VXFD2)
 #### 5.2.3 Consistent Prefix Reads
 Users should see the data in a state that makes causal sense: for example, seeing a question and its reply in the same order.
+![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/consistentPrefixReads.jpg?token=APCY6EY4HWP7UXUNUX5XBLS6VXDSI)
 #### 5.2.4 Solutions for Replication Lag
 ### 5.3 Multi-Leader Replication
 Clients send each write to one of several leader nodes, any of which can accept writes.
 The leaders send streams of data change events to each other and to any follower nodes.
+![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/multi-leader.jpg?token=APCY6E2YQ7L7EVGSZPL4CES6VXFFG)
 #### 5.3.1 Use Cases for Multi-Leader Replication
-Rarely makes sense within a single datacenter. However,
+Rarely makes sense within a single datacenter.
 * multi-datacenter operation
 * client with offline operation (e.g. git)
-* collaborative editing (e.g. google doc, shopping cart)
+* collaborative editing (e.g. google doc)
 #### 5.3.2 Handling Write Conflicts
+![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/multi-leaderConflict.jpg?token=APCY6EZH52APCNJCIAUBFOS6VXFJ4)
 #### 5.3.3 Multi-Leader Replication Topologies
+![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/multi-leaderConflict-01.jpg?token=APCY6E2LG7JZJSGSD53R5LS6VXGGS)
 ### 5.4 Leaderless Replication
 Clients send each write to several nodes, and read from several nodes in parallel in order to detect and correct nodes with stale data.
 #### 5.4.1 Writing to the Database When a Node Is Down
+![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/leaderless.jpg?token=APCY6E3KWOU4IVS5ZYWOLE26VXDZG)
 * read repair and anti-entropy
 * quorums for reading and writing ----> (w + r > n)
+![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/quorums.jpg?token=APCY6E6NRMA7CT5YC6ZSL6S6VXFP4)
 #### 5.4.2 Limitations of Quorum Consistency
 if consider write failed, no roll-back
 #### 5.4.3 Sloppy Quorums and Hinted Handoff
 #### 5.4.4 Detecting Concurrent Writes
 Dynamo-style databases allow several clients to concurrently write to the same key, which means that conflicts will occur even if strict quorums are used (no well-defined ordering).
+![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/leaderlessConflict.jpg?token=APCY6E2RJIXVYPCLRABOJ3C6VXFAA)
 ### 5.5 Summary
 
 # 6. Partitioning
