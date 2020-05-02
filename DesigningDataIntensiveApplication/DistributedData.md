@@ -30,7 +30,7 @@ distributed message brokers and some network filesystems and replicated block de
     #### 5.1.4 Implementation of Replication Logs
 ### 5.2 Problems with Replication Lag
 #### 5.2.1 Reading Your Own Writes
-![Aaron Swartz](https://raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/readingYourOwnWrites.jpg?token=APCY6EZYUL3QDNWWXCCQHD26VXFRI)
+![Aaron Swartz](raw.githubusercontent.com/EvaGuan619/NoteBook/master/DesigningDataIntensiveApplication/pic/readingYourOwnWrites.jpg?token=APCY6EZYUL3QDNWWXCCQHD26VXFRI)
 With asynchronous replication, if the user views the data shortly after making a write, 
 the new data may not yet have reached the replica. To this user, it looks as though the data they submitted was lost.
 Mention a few solutions:
