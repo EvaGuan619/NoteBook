@@ -73,9 +73,41 @@ Dynamo-style databases allow several clients to concurrently write to the same k
 ### 5.5 Summary
 
 # 6. Partitioning
+Each piece of data belongs to exactly one partition. In effect, each partition is a small database of its own, although the database may
+support operations that touch multiple partitions at the same time.
 ### 6.1 Partitioning and Replication
+A node may store more than one partition. Each partition's leader is assigned to one node,
+and its followers are assigned to other nodes. Each node may be the leader for some partitions
+and a follower for other partitions.
 ### 6.2 Partitioning of Key-Value Data
+Goal: spread the data and the query load evenly across nodes.
+The simplest way for avoiding hot spots would be assign records to nodes randomly.
+But we can do better using key-value data model.
+#### 6.2.1 Partitioning by Key Range
+Assign a continuous range of keys
+#### 6.2.2 Partitioning by Hash of Key
+#### 6.2.3 Skewed Workloads and Relieving Hot Spots
 ### 6.3 Partitioning and Secondary Indexes
+#### 6.3.1 Partitioning Secondary Indexes by Document
+#### 6.3.2 Partitioning Secondary Indexes by Term
 ### 6.4 Rebalancing Partitions
+#### 6.4.1 Strategies for Rebalancing
+#### 6.4.2 Operations: Automatic or Manual Rebalancing
 ### 6.5 Request Routing
+#### 6.5.1 Parallel Query Execution
 ### 6.6 Summary
+
+# 7. Transactions
+### 7.1 The Slippery Concept of a Transaction
+#### 7.1.1 The Meaning of ACID
+#### 7.1.2 Single-Object and Multi-Object Operations
+### 7.2 Weak Isolation Levels
+#### 7.2.1 Read Committed
+#### 7.2.2 Snapshot Isolation and Repeatable Read
+#### 7.2.3 Preventing Lost Updates
+#### 7.2.4 Write Skew and Phantoms
+### 7.3 Serializability
+#### 7.3.1 Actual Serial Execution
+#### 7.3.2 Two-Phase Locking(2PL)
+#### 7.3.3 Serializable Snapshot Isolation(SSI)
+### 7.4 Summary
